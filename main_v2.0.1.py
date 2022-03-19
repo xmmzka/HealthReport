@@ -24,12 +24,12 @@ def getjsonid():
         'Referer': 'http://api.njust.edu.cn/healthReport/healthReport.html',
         'Accept-Encoding': 'gzip, deflate',
         'Accept-Language': 'zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7',
-        'Cookie': 'lxwxuserid=######################'
+        'Cookie': 'lxwxuserid=Z+zfE7RYJ0/ak91q27yAWA=='
     }
     body = {}
-    defaultaccount = '##########'  # 预设的账户(学号)
+    defaultaccount = '9201020H0425'  # 预设的账户(学号)
 
-    times = 5
+    times = 5  # 尝试获取JSESSIONID的次数
     for times_var in range(0, times):
         try:
             response = requests.post(
@@ -74,7 +74,7 @@ def getjsonid():
 
 def postinfo(jsonid, num):
     url = 'http://api.njust.edu.cn:80/appHealthReport/healthReport'
-    cookie = 'lxwxuserid=#####################; wxAccount=#################; JSESSIONID=' + jsonid
+    cookie = 'lxwxuserid=Z+zfE7RYJ0/ak91q27yAWA==; wxAccount=OTIwMTAyMEgwNDI1; JSESSIONID=' + jsonid
     headers = {
         'Host': 'api.njust.edu.cn',
         'Connection': 'keep-alive',
@@ -94,8 +94,8 @@ def postinfo(jsonid, num):
         'Cookie': cookie
     }
     body = {
-        'account': '9201020H04##',
-        'userName': '##',
+        'account': '9201020H0425',
+        'userName': '孙逸',
         'userType': '1',
         'deptName': '环境与生物工程学院',
         'deptId': '102',
@@ -113,7 +113,7 @@ def postinfo(jsonid, num):
             if response.status_code == 200:
                 try:
                     if response.json()['status'] == 0:
-                        if response.json()['data']['timeNum'] == num + 1:
+                        if response.json()['data']['timeNum'] == num - 1:
                             print('[', time.time(), '] ',
                                   'Completed successfully!', sep='')
                             return True
@@ -162,7 +162,7 @@ def postinfo(jsonid, num):
 
 
 def notice(text):
-    url = '#################'
+    url = 'https://maker.ifttt.com/trigger/notice_phone/with/key/cXXJcQO4NOmhYCltdou5Wj'
     headers = {'Content-Type': 'application/json'}
     body = {'value1': text}
     try:
