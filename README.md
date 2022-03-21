@@ -1,8 +1,10 @@
 # HealthReport
 
 > '#'部分替换成抓包抓到的数据
+### 依赖
 
-***
+    schedule
+    requests
 
 ### 更新内容
 
@@ -12,4 +14,4 @@
 
 ### 运行脚本
 
-    nohup python -u main.py > report.log 2>&1 &
+    nohup python3 -u main.py > report.log 2>&1 &
